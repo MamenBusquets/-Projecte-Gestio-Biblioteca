@@ -79,6 +79,6 @@ public class Usuari {
 
     @Override
     public String toString() {
-        return Nombre + " (Llibres prestats: " + llibresPrestats.size() + "/" + MAX_LLIBRES + ")";
+        return nom + " (Llibres prestats: " + llibresPrestats.size() + "/" + MAX_LLIBRES + ")";
     }
 }

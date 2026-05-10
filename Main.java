@@ -133,7 +133,7 @@ public class Main {
 
     private static void buscarLibroPorAutor() {
         String autor = leerTexto("Autor a buscar: ");
-        List<Llibre> resultados = biblioteca.buscarLlibrePerAutor(autor);
+        List<Llibre> resultados = biblioteca.buscarLibroPorAutor(autor);
 
         if (resultados.isEmpty()) {
             System.out.println("No se encontraron libros de '" + autor + "'.");
@@ -147,7 +147,7 @@ public class Main {
 
     private static void buscarLibroPorCategoria() {
         String categoria = leerTexto("Categoría a buscar: ");
-        List<Llibre> resultados = biblioteca.buscarLlibrePerCategoria(categoria);
+        List<Llibre> resultados = biblioteca.buscarLibroPorCategoria(categoria);
 
         if (resultados.isEmpty()) {
             System.out.println("No se encontraron libros de la categoría '" + categoria + "'.");
@@ -161,12 +161,13 @@ public class Main {
 
     private static void eliminarLibro() {
         String titol = leerTexto("Título del libro a eliminar: ");
-        if (biblioteca.eliminarLlibrePerTitol(titol)) {
+        if (biblioteca.buscarLibroPorTitulo(titol)) {
             System.out.println("Libro eliminado correctamente.");
         } else {
             System.out.println("No se encontró el libro.");
         }
     }
+    
 
     private static void gestionarUsuarios() {
         int opcion;

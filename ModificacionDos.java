@@ -206,7 +206,7 @@ public class ModificacionDos {
 
         // Resumen de libros
         int totalLibros = biblioteca.getLlibres().size();
-        int disponibles = biblioteca.getLlibresDisponibles().size();
+        int disponibles = biblioteca.getLlibres().size();
         int prestados = totalLibros - disponibles;
 
         System.out.println("RESUMEN DE LIBROS:");
