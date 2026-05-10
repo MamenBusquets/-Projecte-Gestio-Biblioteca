@@ -37,13 +37,13 @@ public class Prestec {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String estat = retornat ? "RETORNAT" : (estaVensut() ? "HA CADUCAT" : "PRESTAT"); // Ús dels operadors ternaris
+        String estat = retornat ? "DEVUELTO" : (estaVencido() ? "VENCIDO" : "ACTIVO"); // Ús dels operadors ternaris
                                                                                            // com a PHP
         return "Préstamo: " + usuari.getNom() + " → " + llibre.getTitol() +
-                " | Data del préstec: " + dataPrestec.format(formatter) +
-                " |Data de retorn: " + dataRetorn.format(formatter) +
+                " | Fecha préstamo: " + dataPrestec.format(formatter) +
+                " |Fecha retorno: " + dataRetorn.format(formatter) +
                 " | Estat: " + estat +
-                (estaVensut() ? " (Retard: " + getDiesRetard() + " dies)" : "");
+                (estaVencido() ? " (Retraso: " + getDiesRetras() + " días)" : "");
     }
 
     /**
@@ -58,7 +58,7 @@ public class Prestec {
      * 
      * @return true si la data actual es posterior a la data de retorn.
      */
-    public boolean estaVensut() {
+    public boolean estaVencido() {
         return LocalDate.now().isAfter(dataRetorn) && !retornat;
     }
 
@@ -67,8 +67,8 @@ public class Prestec {
      * 
      * @return Número de dies de retard, 0 si no ha caducat
      */
-    public long getDiesRetard() {
-        if (!estaVensut())
+    public long getDiesRetras() {
+        if (!estaVencido())
             return 0;
 
         // Compta tots els dies des de 1/1/1970 fins ara i resta la diferència
