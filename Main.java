@@ -15,16 +15,16 @@ public class Main {
     private static List<Usuari> usuaris = new ArrayList<>();
     private static GestorBiblioteca gestor = new GestorBiblioteca();
     private static Scanner scanner = new Scanner(System.in);
-    
+
     public static void main(String[] args) {
         // Datos de ejemplo para pruebas
         cargarDatosEjemplo();
-        
+
         int opcion;
         do {
             mostrarMenu();
             opcion = leerEntero("Seleccione una opción: ");
-            
+
             switch (opcion) {
                 case 1:
                     gestionarLibros();
@@ -45,10 +45,10 @@ public class Main {
                     System.out.println("Opción no válida.");
             }
         } while (opcion != 0);
-        
+
         scanner.close();
     }
-    
+
     private static void mostrarMenu() {
         System.out.println("------ SISTEMA DE GESTIÓN DE BIBLIOTECA ------");
         System.out.println("1. Gestionar libros");
@@ -57,7 +57,7 @@ public class Main {
         System.out.println("4. Consultas y estadísticas");
         System.out.println("0. Salir");
     }
-    
+
     private static void gestionarLibros() {
         int opcion;
         do {
@@ -69,9 +69,9 @@ public class Main {
             System.out.println("5. Buscar libro por categoría");
             System.out.println("6. Eliminar libro");
             System.out.println("0. Volver al menú principal");
-            
+
             opcion = leerEntero("Opción: ");
-            
+
             switch (opcion) {
                 case 1:
                     añadirLibro();
@@ -94,32 +94,32 @@ public class Main {
             }
         } while (opcion != 0);
     }
-    
+
     private static void añadirLibro() {
         System.out.println("------ AÑADIR NUEVO LIBRO ------");
         String titol = leerTexto("Título: ");
         String autor = leerTexto("Autor: ");
         System.out.println("Categorías disponibles: Novel·la, Història, Ciència, General");
         String categoria = leerTexto("Categoría (dejar vacío para 'General'): ");
-        
+
         if (categoria.trim().isEmpty()) {
             categoria = "General";
         }
-        
+
         Llibre llibre = new Llibre(titol, autor, categoria);
         biblioteca.afegirLlibre(llibre);
         System.out.println(" Libro añadido correctamente.");
     }
-    
+
     private static void buscarLibroPorTitulo() {
         String titol = leerTexto("Título del libro a buscar: ");
         Llibre llibre = biblioteca.buscarLlibre(titol);
-        
+
         if (llibre != null) {
             System.out.println("Libro encontrado: " + llibre);
         } else {
             System.out.println("No se encontró el libro.");
-            
+
             // Búsqueda sin acentos
             System.out.println("Intentando búsqueda sin acentos...");
             llibre = biblioteca.buscarLlibreSenseAccents(titol);
@@ -130,11 +130,11 @@ public class Main {
             }
         }
     }
-    
+
     private static void buscarLibroPorAutor() {
         String autor = leerTexto("Autor a buscar: ");
         List<Llibre> resultados = biblioteca.buscarLlibrePerAutor(autor);
-        
+
         if (resultados.isEmpty()) {
             System.out.println("No se encontraron libros de '" + autor + "'.");
         } else {
@@ -144,11 +144,11 @@ public class Main {
             }
         }
     }
-    
+
     private static void buscarLibroPorCategoria() {
         String categoria = leerTexto("Categoría a buscar: ");
         List<Llibre> resultados = biblioteca.buscarLlibrePerCategoria(categoria);
-        
+
         if (resultados.isEmpty()) {
             System.out.println("No se encontraron libros de la categoría '" + categoria + "'.");
         } else {
@@ -158,7 +158,7 @@ public class Main {
             }
         }
     }
-    
+
     private static void eliminarLibro() {
         String titol = leerTexto("Título del libro a eliminar: ");
         if (biblioteca.eliminarLlibrePerTitol(titol)) {
@@ -167,7 +167,7 @@ public class Main {
             System.out.println("No se encontró el libro.");
         }
     }
-    
+
     private static void gestionarUsuarios() {
         int opcion;
         do {
@@ -177,9 +177,9 @@ public class Main {
             System.out.println("3. Buscar usuario");
             System.out.println("4. Eliminar usuario");
             System.out.println("0. Volver al menú principal");
-            
+
             opcion = leerEntero("Opción: ");
-            
+
             switch (opcion) {
                 case 1:
                     añadirUsuario();
@@ -196,40 +196,40 @@ public class Main {
             }
         } while (opcion != 0);
     }
-    
+
     private static void añadirUsuario() {
         String nom = leerTexto("Nombre del usuario: ");
         Usuari usuari = new Usuari(nom);
         usuaris.add(usuari);
         System.out.println("Usuario añadido correctamente.");
     }
-    
+
     private static void listarUsuarios() {
         if (usuaris.isEmpty()) {
             System.out.println("No hay usuarios registrados.");
         } else {
             System.out.println("------ LISTA DE USUARIOS ------");
             for (int i = 0; i < usuaris.size(); i++) {
-                System.out.println((i+1) + ". " + usuaris.get(i));
+                System.out.println((i + 1) + ". " + usuaris.get(i));
             }
         }
     }
-    
+
     private static void buscarUsuario() {
         String nom = leerTexto("Nombre del usuario a buscar: ");
         Usuari usuari = encontrarUsuario(nom);
-        
+
         if (usuari != null) {
             System.out.println("Usuario encontrado: " + usuari);
         } else {
             System.out.println("No se encontró el usuario.");
         }
     }
-    
+
     private static void eliminarUsuario() {
         String nom = leerTexto("Nombre del usuario a eliminar: ");
         Usuari usuari = encontrarUsuario(nom);
-        
+
         if (usuari != null) {
             if (usuari.getNumLlibresPrestats() > 0) {
                 System.out.println("No se puede eliminar el usuario porque tiene libros pendientes de devolver.");
@@ -241,7 +241,7 @@ public class Main {
             System.out.println("No se encontró el usuario.");
         }
     }
-    
+
     private static void gestionarPrestamos() {
         int opcion;
         do {
@@ -251,9 +251,9 @@ public class Main {
             System.out.println("3. Ver libros disponibles");
             System.out.println("4. Ver préstamos activos");
             System.out.println("0. Volver al menú principal");
-            
+
             opcion = leerEntero("Opción: ");
-            
+
             switch (opcion) {
                 case 1:
                     prestarLibro();
@@ -270,50 +270,50 @@ public class Main {
             }
         } while (opcion != 0);
     }
-    
+
     private static void prestarLibro() {
         String nomUsuari = leerTexto("Nombre del usuario: ");
         Usuari usuari = encontrarUsuario(nomUsuari);
-        
+
         if (usuari == null) {
             System.out.println("Usuario no encontrado.");
             return;
         }
-        
+
         String titolLlibre = leerTexto("Título del libro: ");
         Llibre llibre = biblioteca.buscarLlibre(titolLlibre);
-        
+
         if (llibre == null) {
             System.out.println("Libro no encontrado.");
             return;
         }
-        
+
         gestor.prestarLlibre(usuari, llibre);
     }
-    
+
     private static void devolverLibro() {
         String nomUsuari = leerTexto("Nombre del usuario: ");
         Usuari usuari = encontrarUsuario(nomUsuari);
-        
+
         if (usuari == null) {
             System.out.println("Usuario no encontrado.");
             return;
         }
-        
+
         String titolLlibre = leerTexto("Título del libro a devolver: ");
         Llibre llibre = biblioteca.buscarLlibre(titolLlibre);
-        
+
         if (llibre == null) {
             System.out.println("Libro no encontrado.");
             return;
         }
-        
+
         gestor.retornarLlibre(usuari, llibre);
     }
-    
+
     private static void verLibrosDisponibles() {
         List<Llibre> disponibles = biblioteca.getLlibresDisponibles();
-        
+
         if (disponibles.isEmpty()) {
             System.out.println("No hay libros disponibles en este momento.");
         } else {
@@ -323,23 +323,23 @@ public class Main {
             }
         }
     }
-    
+
     private static void verPrestamosActivos() {
         System.out.println("PRÉSTAMOS ACTIVOS:");
         boolean hayActivos = false;
-        
+
         for (Prestec p : gestor.getPrestecs()) {
             if (!p.isRetornat()) {
                 System.out.println("  • " + p);
                 hayActivos = true;
             }
         }
-        
+
         if (!hayActivos) {
             System.out.println(" No hay préstamos activos.");
         }
     }
-    
+
     private static void consultasYEstadisticas() {
         int opcion;
         do {
@@ -348,9 +348,9 @@ public class Main {
             System.out.println("2. Ver estadísticas generales");
             System.out.println("3. Libros más populares");
             System.out.println("0. Volver al menú principal");
-            
+
             opcion = leerEntero("Opción: ");
-            
+
             switch (opcion) {
                 case 1:
                     historialUsuario();
@@ -364,25 +364,25 @@ public class Main {
             }
         } while (opcion != 0);
     }
-    
+
     private static void historialUsuario() {
         String nom = leerTexto("Nombre del usuario: ");
         Usuari usuari = encontrarUsuario(nom);
-        
+
         if (usuari != null) {
             gestor.consultarHistorialUsuari(usuari);
         } else {
             System.out.println("Usuario no encontrado.");
         }
     }
-    
+
     private static void verLibrosMasPrestados() {
         System.out.println("LIBROS MÁS PRESTADOS:");
         // Esta funcionalidad se puede implementar mejor con un mapa de conteo
         // Por ahora mostramos un mensaje informativo
         System.out.println("  Próximamente en la versión 2.0.");
     }
-    
+
     // Métodos auxiliares
     private static Usuari encontrarUsuario(String nom) {
         for (Usuari u : usuaris) {
@@ -392,12 +392,12 @@ public class Main {
         }
         return null;
     }
-    
+
     private static String leerTexto(String mensaje) {
         System.out.print(mensaje);
         return scanner.nextLine().trim();
     }
-    
+
     private static int leerEntero(String mensaje) {
         System.out.print(mensaje);
         while (!scanner.hasNextInt()) {
@@ -408,7 +408,7 @@ public class Main {
         scanner.nextLine(); // Limpiar buffer
         return numero;
     }
-    
+
     private static void cargarDatosEjemplo() {
         // Libros de ejemplo
         Llibre llibre1 = new Llibre("1984", "George Orwell", "Novel·la");
@@ -416,13 +416,13 @@ public class Main {
         Llibre llibre3 = new Llibre("Història de Espanya", "Juan Pérez", "Història");
         Llibre llibre4 = new Llibre("Física Cuántica", "Stephen Hawking", "Ciència");
         Llibre llibre5 = new Llibre("Cien años de soledad", "Gabriel García Márquez", "Novel·la");
-        
+
         biblioteca.afegirLlibre(llibre1);
         biblioteca.afegirLlibre(llibre2);
         biblioteca.afegirLlibre(llibre3);
         biblioteca.afegirLlibre(llibre4);
         biblioteca.afegirLlibre(llibre5);
-        
+
         // Usuarios de ejemplo
         usuaris.add(new Usuari("Carla"));
         usuaris.add(new Usuari("Marc"));
