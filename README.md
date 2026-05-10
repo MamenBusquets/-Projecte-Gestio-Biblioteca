@@ -11,12 +11,14 @@ M-ED: Entorns de desenvolupament - AEA3.1
 - María
 
 ## Classes implementades
-- Llibre (Enrique)
-- Usuari (María)
+- Llibre (María) 
+- Usuari (Enrique)
 - Biblioteca (Alejandro)
-- GestorBiblioteca (María)
-- Prestec (Enrique)
-- Main (Alejandro)
+- GestorBiblioteca (Enrique)
+- Prestec (María) 
+- Main (Enrique)
+- Ampliacion 1 (Enrique)
+- Ampliacion 2 (Enrique)
 # -Projecte-Gestio-Biblioteca
 Sistema de gestio per a una biblioteca desenvolupat amb POO en Java.
 ## Mòdul
@@ -32,3 +34,5 @@ M-ED: Entorns de desenvolupament - AEA3.1
 - GestorBiblioteca
 - Prestec
 - Main
+- Ampliacion 1 
+- Ampliacion 2 
